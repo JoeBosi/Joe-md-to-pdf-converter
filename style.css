@@ -1,0 +1,272 @@
+/* ============================================
+   Professional A4 Document Styling
+   Author: Giuseppe Bosi
+   ============================================ */
+
+/* Page Setup - A4 Format */
+@page {
+  size: A4;
+  margin-top: 1.5cm;
+  margin-bottom: 1.5cm;
+  margin-left: 1.5cm;
+  margin-right: 2.5cm;
+}
+
+/* Base Typography */
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #2c3e50;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+/* Headings - Professional Hierarchy */
+h1 {
+  font-family: "Arial", "Helvetica", sans-serif;
+  font-size: 20pt;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-top: 10;
+  margin-bottom: 12t;
+  padding-bottom: 8pt;
+  border-bottom: 1.5pt solid #3498db;
+  page-break-after: avoid;
+  text-align: center;   /* ← aggiungi questa riga */
+}
+
+h2 {
+  font-family: "Arial", "Helvetica", sans-serif;
+  font-size: 16pt;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-top: 20pt;
+  margin-bottom: 10pt;
+  padding-bottom: 4pt;
+  border-bottom: 0.75pt solid #e0e0e0;
+  page-break-after: avoid;
+  text-align: center;   /* ← aggiungi questa riga */
+}
+
+h3 {
+  font-family: "Arial", "Helvetica", sans-serif;
+  font-size: 14pt;
+  font-weight: 600;
+  color: #34495e;
+  margin-top: 16pt;
+  margin-bottom: 8pt;
+  page-break-after: avoid;
+}
+
+h4 {
+  font-family: "Arial", "Helvetica", sans-serif;
+  font-size: 12pt;
+  font-weight: 600;
+  color: #34495e;
+  margin-top: 12pt;
+  margin-bottom: 6pt;
+  page-break-after: avoid;
+}
+
+/* Paragraphs */
+p {
+  margin: 8pt 0;
+  text-align: justify;
+  orphans: 3;
+  widows: 3;
+}
+
+/* Lists */
+ul, ol {
+  margin: 10pt 0;
+  padding-left: 24pt;
+}
+
+li {
+  margin: 4pt 0;
+  line-height: 1.5;
+}
+
+ul li {
+  list-style-type: disc;
+}
+
+ol li {
+  list-style-type: decimal;
+}
+
+/* Links */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Tables - Professional Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12pt 0;
+  page-break-inside: avoid;
+  border: 0.5pt solid #e0e0e0;
+}
+
+th {
+  background-color: #34495e;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8pt;
+  text-align: left;
+  border: 0.5pt solid #2c3e50;
+}
+
+td {
+  padding: 6pt 8pt;
+  border: 0.5pt solid #e8e8e8;
+  background-color: #ffffff;
+}
+
+tr:nth-child(even) td {
+  background-color: #f8f9fa;
+}
+
+table tr:first-child th {
+  border-top: 0.5pt solid #2c3e50;
+}
+
+table tr:last-child td {
+  border-bottom: 0.5pt solid #e0e0e0;
+}
+
+/* Code Blocks */
+pre {
+  background-color: #f8f9fa;
+  border: 0.5pt solid #e0e0e0;
+  border-left: 3pt solid #3498db;
+  border-radius: 3pt;
+  padding: 12pt;
+  margin: 12pt 0;
+  overflow-x: auto;
+  page-break-inside: avoid;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 10pt;
+  line-height: 1.4;
+}
+
+code {
+  background-color: #f8f9fa;
+  border: 0.5pt solid #e0e0e0;
+  border-radius: 2pt;
+  padding: 2pt 4pt;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 10pt;
+  color: #e74c3c;
+}
+
+pre code {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: #2c3e50;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 3pt solid #3498db;
+  margin: 12pt 0;
+  padding: 8pt 16pt;
+  background-color: #f8f9fa;
+  border-right: 0.5pt solid #e0e0e0;
+  border-top: 0.5pt solid #e0e0e0;
+  border-bottom: 0.5pt solid #e0e0e0;
+  font-style: italic;
+  color: #555;
+  page-break-inside: avoid;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 12pt auto;
+  page-break-inside: avoid;
+}
+
+/* Horizontal Rules */
+hr {
+  border: none;
+  border-top: 0.75pt solid #e0e0e0;
+  margin: 16pt 0;
+}
+
+/* Emphasis */
+strong, b {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* Page Breaks */
+.page-break {
+  page-break-before: always;
+}
+
+.no-break {
+  page-break-inside: avoid;
+}
+
+/* Math Formulas Styling */
+.math-inline {
+  display: inline-block;
+  margin: 0 2pt;
+}
+
+.math-block {
+  display: block;
+  margin: 12pt 0;
+  text-align: center;
+  page-break-inside: avoid;
+}
+
+/* MathJax specific styles */
+.MathJax {
+  font-size: 1em !important;
+}
+
+.MathJax_Display {
+  margin: 1em 0 !important;
+}
+
+/* Print Optimizations */
+@media print {
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+  
+  p, li {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  table, pre, blockquote {
+    page-break-inside: avoid;
+  }
+  
+  .math-block {
+    page-break-inside: avoid;
+  }
+}

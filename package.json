@@ -1,0 +1,13 @@
+{
+  "name": "md-to-pdf-converter",
+  "version": "1.0.0",
+  "description": "Markdown to PDF converter (pre-processing + npx md-to-pdf)",
+  "main": "convert-md-to-pdf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["markdown", "pdf", "converter"],
+  "author": "Giuseppe Bosi",
+  "license": "ISC",
+  "type": "commonjs"
+}

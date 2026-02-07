@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Excluded folders (project rule)
+Backup/
+Backup 1/
+cursor/
+assets/
+old/
+
+# OS
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and temp
+*.log
+*.tmp
+.cache/
