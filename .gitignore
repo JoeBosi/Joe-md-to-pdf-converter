@@ -1,12 +1,21 @@
 # Dependencies
 node_modules/
 
-# Excluded folders (project rule)
+# User content and generated output (do not publish)
+.md/
+.pdf/
+.svg/
+
+# Backups and temp
 Backup/
 Backup 1/
+Backup 2/
 cursor/
 assets/
 old/
+
+# Generated PDFs (output of the converter)
+*.pdf
 
 # OS
 desktop.ini
