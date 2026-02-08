@@ -23,7 +23,8 @@ A lightweight, script-based pipeline to convert Markdown files to PDF with math 
 ├── .md/                    # Input: place your Markdown files here (not in repo)
 ├── .pdf/                   # Output: generated PDFs (not in repo)
 ├── convert-md-to-pdf.js    # Pre-processor: math formulas → HTML spans
-├── converti_md_pdf_completo.ps1   # Main script: runs pre-process + md-to-pdf
+├── converti_md_pdf_completo.ps1   # Main script (Windows): runs pre-process + md-to-pdf
+├── converti_md_pdf_completo.sh    # Main script (Linux/macOS): same workflow
 ├── style.css               # PDF styling (A4, tables, code, etc.)
 ├── pdf-options.json        # Puppeteer PDF options (format, margins, footer)
 ├── package.json            # Project metadata (md-to-pdf via npx)
@@ -36,10 +37,11 @@ A lightweight, script-based pipeline to convert Markdown files to PDF with math 
 ## Requirements
 
 - **Node.js** (LTS recommended)
-- **PowerShell** (Windows) or PowerShell Core
+- **Windows:** PowerShell (or PowerShell Core)
+- **Linux/macOS:** Bash
 - **npx** (bundled with npm)
 
-No need to install `md-to-pdf` globally; the script uses `npx --yes md-to-pdf`.
+No need to install `md-to-pdf` globally; the scripts use `npx --yes md-to-pdf`.
 
 ---
 
@@ -58,8 +60,15 @@ No need to install `md-to-pdf` globally; the script uses `npx --yes md-to-pdf`.
 1. Place your `.md` files in the `.md` folder.
 2. From the project root, run:
 
+   **Windows (PowerShell):**
    ```powershell
    .\converti_md_pdf_completo.ps1
+   ```
+
+   **Linux / macOS:**
+   ```bash
+   chmod +x converti_md_pdf_completo.sh   # once, to make executable
+   ./converti_md_pdf_completo.sh
    ```
 
 3. For each `.md` file, the script:
@@ -67,8 +76,7 @@ No need to install `md-to-pdf` globally; the script uses `npx --yes md-to-pdf`.
    - Calls `npx md-to-pdf` with `style.css` and `pdf-options.json`.
    - Moves the generated PDF from `.md/` to `.pdf/` (same base name).
 
-If execution policy blocks the script:
-
+**Windows:** If execution policy blocks the script:
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 .\converti_md_pdf_completo.ps1
