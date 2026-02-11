@@ -3,6 +3,9 @@
    Author: Giuseppe Bosi
    ============================================ */
 
+/* KaTeX base styles (CDN) */
+@import url("https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css");
+
 /* Page Setup - A4 Format */
 @page {
   size: A4;
@@ -235,6 +238,11 @@ em, i {
   margin: 12pt 0;
   text-align: center;
   page-break-inside: avoid;
+}
+
+/* KaTeX blocks should be centered and readable */
+.katex-block {
+  display: inline-block;
 }
 
 /* MathJax specific styles */
