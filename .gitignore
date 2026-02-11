@@ -5,12 +5,13 @@ node_modules/
 .md/
 .pdf/
 .svg/
+default.md
 
 # Backups and temp
 Backup/
 Backup 1/
 Backup 2/
-cursor/
+.cursor/
 assets/
 old/
 
