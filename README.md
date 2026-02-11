@@ -33,6 +33,7 @@ A small, script-based toolchain to convert Markdown files into PDF with **LaTeX 
 ├── README.md                    # This file
 ├── ARCHITECTURE.md              # Pipeline and design notes
 ├── GUIDA_CONVERSIONE_MD_PDF.md  # Detailed Italian/English usage guide
+├── PROJECT_STATE.md             # High-level status and repository policy
 └── file md - regole per gli agents.md  # Markdown rules and project-specific agent rules
 ```
 
@@ -85,8 +86,15 @@ A small, script-based toolchain to convert Markdown files into PDF with **LaTeX 
 
 2. From the project root, run:
 
+   **Windows (PowerShell):**
    ```powershell
    .\converti_md_pdf_completo.ps1
+   ```
+
+   **Linux / macOS:**
+   ```bash
+   chmod +x converti_md_pdf_completo.sh   # once, to make executable
+   ./converti_md_pdf_completo.sh
    ```
 
 3. For each `.md` file, the script:
@@ -95,8 +103,12 @@ A small, script-based toolchain to convert Markdown files into PDF with **LaTeX 
    - Moves the generated PDF from `.md/` to `.pdf/` (same base name).
    - Cleans up temporary files and opens the `.pdf` folder in Explorer at the end.
 
+<<<<<<< HEAD
 If the execution policy blocks the script, you can run:
 
+=======
+**Windows:** If execution policy blocks the script:
+>>>>>>> a55399b70ba43c81eae56495c5670b427700075f
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 .\converti_md_pdf_completo.ps1
