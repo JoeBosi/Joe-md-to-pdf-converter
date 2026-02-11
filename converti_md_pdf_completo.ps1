@@ -48,7 +48,9 @@ if (-not (Test-Path $mdDir)) {
     exit 1
 }
 
-$mdFiles = Get-ChildItem -Path $mdDir -Filter "*.md" | Where-Object { $_.Name -ne "cursor.md" }
+$mdFiles = Get-ChildItem -Path $mdDir -Filter "*.md" | Where-Object {
+    $_.Name -ne "cursor.md" -and $_.Name -notlike "*.__pdf__.md"
+}
 if ($mdFiles.Count -eq 0) {
     Write-Host "Nessun file .md trovato nella cartella .md" -ForegroundColor Yellow
     Write-Host "Conversione completata (nessun file da convertire)." -ForegroundColor Cyan
@@ -74,9 +76,15 @@ try {
 
         Write-Host "Convertendo $mdName ..." -ForegroundColor Yellow
 
-        # Pre-process math formulas (in place)
-        Write-Host "  Pre-processing formule matematiche..." -ForegroundColor Gray
-        & node $converterScript $mdFullPath
+        # Pre-process math formulas into a temporary markdown file
+        $tempMdName = "$baseName.__pdf__.md"
+        $tempMdFullPath = Join-Path $mdDir $tempMdName
+        $tempMdRelPath = Join-Path $mdDirRel $tempMdName
+        $tempPdfName = "$baseName.__pdf__.pdf"
+        $tempPdfFullPath = Join-Path $mdDir $tempPdfName
+
+        Write-Host "  Pre-processing formule matematiche (file temporaneo)..." -ForegroundColor Gray
+        & node $converterScript $mdFullPath $tempMdFullPath
         if ($LASTEXITCODE -ne 0) {
             Write-Host "  ERRORE nel pre-processing" -ForegroundColor Red
             continue
@@ -91,7 +99,7 @@ try {
         $batchContent = @"
 @echo off
 cd /d "$rootDir"
-npx --yes md-to-pdf "$mdRelPath" --stylesheet "style.css" --pdf-options "$jsonForBatch"
+npx --yes md-to-pdf "$tempMdRelPath" --stylesheet "style.css" --pdf-options "$jsonForBatch"
 "@
         $batchContent | Out-File -FilePath $batchFile -Encoding ASCII -Force
 
@@ -102,13 +110,19 @@ npx --yes md-to-pdf "$mdRelPath" --stylesheet "style.css" --pdf-options "$jsonFo
             if (Test-Path $batchFile) { Remove-Item $batchFile -Force -ErrorAction SilentlyContinue }
         }
 
-        $pdfFromPath = Join-Path $mdDir "$baseName.pdf"
+        # md-to-pdf creates the PDF next to the input markdown, with the same base name
+        $pdfFromPath = $tempPdfFullPath
         $pdfToPath   = Join-Path $pdfDir "$baseName.pdf"
         if (Test-Path $pdfFromPath) {
             Move-Item -Path $pdfFromPath -Destination $pdfToPath -Force
             Write-Host "OK: $baseName.pdf -> .pdf\" -ForegroundColor Green
         } else {
             Write-Host "ERRORE: PDF non generato per $mdName" -ForegroundColor Red
+        }
+
+        # Clean up temporary markdown file
+        if (Test-Path $tempMdFullPath) {
+            Remove-Item $tempMdFullPath -Force -ErrorAction SilentlyContinue
         }
         Write-Host ""
     }
@@ -117,3 +131,9 @@ npx --yes md-to-pdf "$mdRelPath" --stylesheet "style.css" --pdf-options "$jsonFo
 }
 
 Write-Host "Conversione completata!" -ForegroundColor Cyan
+
+# Open the output folder in Explorer for quick access to generated PDFs
+if (Test-Path $pdfDir) {
+    Write-Host "Apro la cartella PDF: $pdfDir" -ForegroundColor Gray
+    Start-Process explorer.exe $pdfDir
+}

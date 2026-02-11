@@ -6,8 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["markdown", "pdf", "converter"],
+  "keywords": [
+    "markdown",
+    "pdf",
+    "converter"
+  ],
   "author": "Giuseppe Bosi",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "katex": "^0.16.9"
+  }
 }
