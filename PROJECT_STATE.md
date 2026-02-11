@@ -73,10 +73,12 @@ This matches the current `.gitignore`. If any of these paths appear staged, they
 
 ---
 
-### 5. Status summary
+### 5. Repository policy (standalone)
 
-- Local `master` is ahead of `origin/master` by 1 commit with:
-  - KaTeX-based math rendering.
-  - Non-destructive pipeline using temp files.
-  - Updated documentation and ignore rules.
+- The project is **autonomous**: the local branch does not track any remote (no `origin/master` tracking). You can work offline; to publish or update a remote, add the remote and push when needed.
+- The codebase is self-contained and not tied to any third-party repository; a copy on GitHub remains independent.
+
+### 6. Status summary
+
+- KaTeX-based math rendering, non-destructive pipeline (temp files), documentation and ignore rules are in place.
 

@@ -12,8 +12,12 @@ Backup/
 Backup 1/
 Backup 2/
 .cursor/
+cursor/
 assets/
 old/
+
+# Local-only helper docs
+file md - regole per gli agents.md
 
 # Generated PDFs (output of the converter)
 *.pdf
