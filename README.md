@@ -42,6 +42,10 @@ A small, script-based toolchain to convert Markdown files into PDF with **LaTeX 
 > - The `.md/`, `.pdf/`, `.svg/`, `Backup*`, `old/`, `.cursor/`, and `default.md` paths are **git-ignored**.
 > - This repository only contains the **converter code and documentation**, never your personal Markdown or PDF content.
 
+> **Standalone repository**
+>
+> This project is **self-contained** and not tied to any other repository. The local copy does not track a remote branch by default. You can use it offline or publish your own copy to GitHub; that copy remains independent (no dependency on or link to third-party repos). To publish or update a remote, add a remote and push when needed (e.g. `git remote add origin <your-repo-url>`, then `git push -u origin master`).
+
 ---
 
 ## Requirements
