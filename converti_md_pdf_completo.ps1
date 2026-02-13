@@ -64,7 +64,6 @@ Write-Host ""
 
 # Relative paths from root (for npx from rootDir)
 $mdDirRel = ".md"
-$pdfDirRel = ".pdf"
 
 Push-Location $rootDir
 try {
@@ -72,7 +71,6 @@ try {
         $mdName = $mdItem.Name
         $baseName = $mdItem.BaseName
         $mdFullPath = $mdItem.FullName
-        $mdRelPath = Join-Path $mdDirRel $mdName
 
         Write-Host "Convertendo $mdName ..." -ForegroundColor Yellow
 
@@ -91,23 +89,29 @@ try {
         }
 
         # Build PDF in same dir as MD (.md), then move to .pdf
-        $jsonObj = Get-Content $pdfOptionsPath -Raw -Encoding UTF8 | ConvertFrom-Json
-        $jsonContent = $jsonObj | ConvertTo-Json -Compress -Depth 10
-        $jsonForBatch = $jsonContent -replace '"', '""'
-
-        $batchFile = Join-Path $env:TEMP "md-to-pdf-$(Get-Random).bat"
-        $batchContent = @"
-@echo off
-cd /d "$rootDir"
-npx --yes md-to-pdf "$tempMdRelPath" --stylesheet "style.css" --pdf-options "$jsonForBatch"
-"@
-        $batchContent | Out-File -FilePath $batchFile -Encoding ASCII -Force
+        # Read JSON content and pass as string (md-to-pdf expects JSON string, not file path)
+        # Use cmd.exe to preserve Unicode characters in file paths
+        # Use relative path for portability (we're already in $rootDir)
+        $jsonContent = Get-Content "pdf-options.json" -Raw -Encoding UTF8
+        # Minify JSON and escape for cmd.exe
+        $jsonObj = $jsonContent | ConvertFrom-Json
+        $jsonMinified = $jsonObj | ConvertTo-Json -Compress -Depth 10
+        # Escape quotes for cmd.exe: " becomes \"
+        $jsonEscaped = $jsonMinified -replace '"', '\"'
 
         Write-Host "  Generando PDF..." -ForegroundColor Gray
         try {
-            & $batchFile
-        } finally {
-            if (Test-Path $batchFile) { Remove-Item $batchFile -Force -ErrorAction SilentlyContinue }
+            # Use cmd.exe to execute npx to preserve Unicode characters in file paths
+            # Pass JSON as string with proper escaping for cmd.exe
+            $npxCmd = "npx --yes md-to-pdf `"$tempMdRelPath`" --stylesheet `"style.css`" --pdf-options `"$jsonEscaped`""
+            & cmd.exe /c "chcp 65001 >nul && $npxCmd" | Out-Null
+            $npxExitCode = $LASTEXITCODE
+            
+            if ($npxExitCode -ne 0) {
+                Write-Host "  ERRORE nella generazione PDF" -ForegroundColor Red
+            }
+        } catch {
+            Write-Host "  ERRORE nella generazione PDF: $_" -ForegroundColor Red
         }
 
         # md-to-pdf creates the PDF next to the input markdown, with the same base name
