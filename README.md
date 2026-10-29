@@ -134,3 +134,7 @@ For a more detailed, Italian-focused guide (with an English quick section), see 
 ## License
 
 ISC
+
+---
+
+Author: Giuseppe Bosi · [www.giuseppebosi.com](https://www.giuseppebosi.com) · [LinkedIn](https://www.linkedin.com/in/giuseppebosi) · License: MIT
